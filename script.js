@@ -5,14 +5,8 @@ var photoFiles = ['abba.jpg', 'kevinrowland.jpg', 'bajo.jpg', 'liebe.jpg',
 					'godschild.jpg', 'tino.jpg', 'gunther.jpg', 'waynecochranegoinbacktomiami.jpg', 
 					'kenbyrequestonly.jpg'];
 
-var randImg1 = function () {
+var randImg = function () {
 		return Math.floor(Math.random() * photoFiles.length);
-	};
-
-var randImg2 = function () {
-		do {
-			return Math.floor(Math.random() * photoFiles.length);
-		} while (randImg2 != randImg1);
 	};
 
 var addImages = function () {
@@ -25,10 +19,12 @@ var addImages = function () {
 		img2Loc.removeChild(img2Loc.firstChild);
 	}
 	var img1El = document.createElement('img');
-	img1El.src = 'img/' + photoFiles[randImg1()];
+	img1El.src = 'img/' + photoFiles[randImg()];
 	img1Loc.appendChild(img1El);
 	var img2El = document.createElement('img');
-	img2El.src = 'img/' + photoFiles[randImg2()];
+	do {
+	img2El.src = 'img/' + photoFiles[randImg()];
+	} while (img2El.src == img1El.src);
 	img2Loc.appendChild(img2El);
 }
 
