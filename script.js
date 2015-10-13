@@ -18,10 +18,10 @@ var randImg2 = function () {
 var addImages = function () {
 	var img1Loc = document.getElementById('img1');
 	var img2Loc = document.getElementById('img2');
-	while (img1Loc.firstChild) {
+	if (img1Loc.firstChild) {
 		img1Loc.removeChild(img1Loc.firstChild);
 	}
-	while (img2Loc.firstChild) {
+	if (img2Loc.firstChild) {
 		img2Loc.removeChild(img2Loc.firstChild);
 	}
 	var img1El = document.createElement('img');
