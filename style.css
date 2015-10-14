@@ -24,7 +24,7 @@
   text-align: center;
 }
 
-#box_one, #box_three, #box_two {
+#box_one, #chart_box, #box_two {
   flex-grow: 1;
 }
 

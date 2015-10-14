@@ -1,7 +1,7 @@
 var photoFiles = ['abba.jpg', 'kevinrowland.jpg', 'bajo.jpg', 'liebe.jpg', 
 					'bangerz.jpg', 'manowar.jpg', 'bieber.jpg', 'massage.jpg', 
-					'cugini.jpg', 'norberto.jpg', 'dance.jpg', 'orleans.jpeg', 
-					'devastatindave.jpg', 'quim.png', 'fleetwoodmac.jpg', 'stevewarren.jpg', 
+					'cugini.jpg', 'norberto.jpg', 'dance.jpg', 
+					'devastatindave.jpg', 'fleetwoodmac.jpg', 
 					'godschild.jpg', 'tino.jpg', 'gunther.jpg', 'waynecochranegoinbacktomiami.jpg', 
 					'kenbyrequestonly.jpg'];
 
