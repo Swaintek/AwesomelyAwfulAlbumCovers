@@ -11,12 +11,16 @@
 	float: right;
 }*/
 
+body {
+	background-image: url('img/record_store.jpg');
+}
+
 .parent {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   border: 1px dashed orange;
-  /*justify-content: space-between;*/
+  justify-content: space-between;
 }
 
 .child {
