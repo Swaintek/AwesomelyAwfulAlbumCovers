@@ -42,7 +42,7 @@ var addImages = function () {
 	do {
 	img2 = randImg();
 	img2El.src = 'img/' + albumArray[img2].album;
-	} while (img2El.src == img1El.src);
+	} while (img2El.src === img1El.src);
 	img2Loc.appendChild(img2El);
 };
 

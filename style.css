@@ -1,4 +1,4 @@
-#img1 #img2 {
+/*#img1 #img2 {
 	float: left;
 	max-width: 200px;
 	max-height: 200px;
@@ -9,4 +9,25 @@
 }
 #img2 {
 	float: right;
+}*/
+
+.parent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px dashed orange;
+  /*justify-content: space-between;*/
 }
+
+.child {
+  border: 1px solid blue;
+  text-align: center;
+}
+
+#box_one, #box_three, #box_two {
+  flex-grow: 1;
+}
+
+/*#box_two {
+  flex-grow: 2;
+}*/
