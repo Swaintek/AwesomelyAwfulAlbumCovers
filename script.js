@@ -53,6 +53,7 @@ img1Button.addEventListener('click', function() {
 	albumArray[img1].score += 1;
 	console.log(albumArray[img1]);
 	addImages();
+	scoreChart();
 });
 
 var img2Button = document.getElementById('img2');
@@ -60,4 +61,27 @@ img2Button.addEventListener('click', function() {
 	albumArray[img2].score += 1;
 	console.log(albumArray[img2]);
 	addImages();
+	scoreChart();
 });
+
+
+var scoreChart = function() {
+
+var ctx = document.getElementById("chart_box").getContext("2d");
+
+var data = [
+    {
+        value: albumArray[img1].score,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+    },
+    {
+        value: albumArray[img2].score,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Green"
+    },
+  ]
+var myDoughnutChart = new Chart(ctx).Doughnut(data);
+}
