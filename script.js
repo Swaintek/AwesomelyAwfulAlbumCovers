@@ -6,19 +6,20 @@ var photoFiles = ['abba.jpg', 'kevinrowland.jpg', 'bajo.jpg', 'liebe.jpg',
 					'kenbyrequestonly.jpg'];
 
 var albumArray = [];
+var img1, img2;
 
-var img1;
+if (localStorage.storage) {
+	albumArray = JSON.parse(localStorage.getItem('storage'));
+} else {
+	var Album = function (album, score) {
+		this.album = album;
+		this.score = score;
+	};
 
-var img2;
-
-var Album = function (album, score) {
-	this.album = album;
-	this.score = score;
-};
-
-for (var i = 0; i < photoFiles.length; i += 1) {
-	var newAlbum = new Album(photoFiles[i], 0);
-	albumArray.push(newAlbum);
+	for (var i = 0; i < photoFiles.length; i += 1) {
+		var newAlbum = new Album(photoFiles[i], 0);
+		albumArray.push(newAlbum);
+	};
 };
 
 var randImg = function () {
@@ -55,6 +56,8 @@ img1Button.addEventListener('click', function() {
 	addImages();
 	console.log('Left: ' + albumArray[img1].score + ' Right: ' + albumArray[img2].score)
 	updateGauges();
+	var albumHolder1 = JSON.stringify(albumArray);
+	localStorage.setItem('storage', albumHolder1);
 });
 
 var img2Button = document.getElementById('img2');
@@ -64,9 +67,9 @@ img2Button.addEventListener('click', function() {
 	addImages();
 	console.log('Left: ' + albumArray[img1].score + ' Right: ' + albumArray[img2].score)
 	updateGauges();
+	var albumHolder2 = JSON.stringify(albumArray);
+	localStorage.setItem('storage', albumHolder2);
 });
-
-
 
 var gauges = [];
 var scores = [img1, img2];
@@ -75,7 +78,7 @@ function createGauge(name, label, min, max)
 {
 	var config = 
 	{
-		size: 120,
+		size: 200,
 		label: label,
 		min: undefined != min ? min : 0,
 		max: undefined != max ? max : 100,
