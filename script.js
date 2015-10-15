@@ -53,7 +53,8 @@ img1Button.addEventListener('click', function() {
 	albumArray[img1].score += 1;
 	console.log(albumArray[img1]);
 	addImages();
-	scoreChart();
+	console.log('Left: ' + albumArray[img1].score + ' Right: ' + albumArray[img2].score)
+	updateGauges();
 });
 
 var img2Button = document.getElementById('img2');
@@ -61,27 +62,45 @@ img2Button.addEventListener('click', function() {
 	albumArray[img2].score += 1;
 	console.log(albumArray[img2]);
 	addImages();
-	scoreChart();
+	console.log('Left: ' + albumArray[img1].score + ' Right: ' + albumArray[img2].score)
+	updateGauges();
 });
 
 
-var scoreChart = function() {
 
-var ctx = document.getElementById("chart_box").getContext("2d");
+var gauges = [];
+var scores = [img1, img2];
 
-var data = [
-    {
-        value: albumArray[img1].score,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-    },
-    {
-        value: albumArray[img2].score,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-    },
-  ]
-var myDoughnutChart = new Chart(ctx).Doughnut(data);
+function createGauge(name, label, min, max)
+{
+	var config = 
+	{
+		size: 120,
+		label: label,
+		min: undefined != min ? min : 0,
+		max: undefined != max ? max : 100,
+		minorTicks: 5
+	}
+	
+	var range = config.max - config.min;
+	config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
+	config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+	
+	gauges[name] = new Gauge(name + "GaugeContainer", config);
+	gauges[name].render();
 }
+
+function createGauges()
+{
+	createGauge("left", "Awesomeness", 0, 10);
+	createGauge("right", "Awesomeness", 0, 10);
+}
+
+function updateGauges()
+{
+	gauges.left.redraw(albumArray[img1].score);
+	gauges.right.redraw(albumArray[img2].score);
+}
+
+createGauges();
+
