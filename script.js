@@ -6,19 +6,23 @@ var photoFiles = ['abba.jpg', 'kevinrowland.jpg', 'bajo.jpg', 'liebe.jpg',
 					'kenbyrequestonly.jpg'];
 
 var albumArray = [];
+var img1, img2;
+var gauges = [];
+var scores = [img1, img2];
 
-var img1;
+if (localStorage.getItem('storage') != null) {
+	albumArray = JSON.parse(localStorage.getItem('storage'));
 
-var img2;
+} else {
+	var Album = function (album, score) {
+		this.album = album;
+		this.score = score;
+	};
 
-var Album = function (album, score) {
-	this.album = album;
-	this.score = score;
-};
-
-for (var i = 0; i < photoFiles.length; i += 1) {
-	var newAlbum = new Album(photoFiles[i], 0);
-	albumArray.push(newAlbum);
+	for (var i = 0; i < photoFiles.length; i += 1) {
+		var newAlbum = new Album(photoFiles[i], 0);
+		albumArray.push(newAlbum);
+	};
 };
 
 var randImg = function () {
@@ -53,7 +57,9 @@ img1Button.addEventListener('click', function() {
 	albumArray[img1].score += 1;
 	console.log(albumArray[img1]);
 	addImages();
-	scoreChart();
+	console.log('Left: ' + albumArray[img1].score + ' Right: ' + albumArray[img2].score)
+	updateGauges();
+	localStorage.setItem('storage', JSON.stringify(albumArray));
 });
 
 var img2Button = document.getElementById('img2');
@@ -61,27 +67,43 @@ img2Button.addEventListener('click', function() {
 	albumArray[img2].score += 1;
 	console.log(albumArray[img2]);
 	addImages();
-	scoreChart();
+	console.log('Left: ' + albumArray[img1].score + ' Right: ' + albumArray[img2].score)
+	updateGauges();
+	localStorage.setItem('storage', JSON.stringify(albumArray));
 });
 
 
-var scoreChart = function() {
-
-var ctx = document.getElementById("chart_box").getContext("2d");
-
-var data = [
-    {
-        value: albumArray[img1].score,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-    },
-    {
-        value: albumArray[img2].score,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-    },
-  ]
-var myDoughnutChart = new Chart(ctx).Doughnut(data);
+function createGauge(name, label, min, max)
+{
+	var config = 
+	{
+		size: 200,
+		label: label,
+		min: undefined != min ? min : 0,
+		max: undefined != max ? max : 100,
+		minorTicks: 5
+	}
+	
+	var range = config.max - config.min;
+	config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
+	config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+	
+	gauges[name] = new Gauge(name + "GaugeContainer", config);
+	gauges[name].render();
 }
+
+function createGauges()
+{
+	createGauge("left", "Awesomeness", 0, 10);
+	createGauge("right", "Awesomeness", 0, 10);
+}
+
+function updateGauges()
+{
+	gauges.left.redraw(albumArray[img1].score);
+	gauges.right.redraw(albumArray[img2].score);
+}
+
+createGauges();
+
+updateGauges();
