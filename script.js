@@ -7,9 +7,12 @@ var photoFiles = ['abba.jpg', 'kevinrowland.jpg', 'bajo.jpg', 'liebe.jpg',
 
 var albumArray = [];
 var img1, img2;
+var gauges = [];
+var scores = [img1, img2];
 
-if (localStorage.storage) {
+if (localStorage.getItem('storage') != null) {
 	albumArray = JSON.parse(localStorage.getItem('storage'));
+
 } else {
 	var Album = function (album, score) {
 		this.album = album;
@@ -56,8 +59,7 @@ img1Button.addEventListener('click', function() {
 	addImages();
 	console.log('Left: ' + albumArray[img1].score + ' Right: ' + albumArray[img2].score)
 	updateGauges();
-	var albumHolder1 = JSON.stringify(albumArray);
-	localStorage.setItem('storage', albumHolder1);
+	localStorage.setItem('storage', JSON.stringify(albumArray));
 });
 
 var img2Button = document.getElementById('img2');
@@ -67,12 +69,9 @@ img2Button.addEventListener('click', function() {
 	addImages();
 	console.log('Left: ' + albumArray[img1].score + ' Right: ' + albumArray[img2].score)
 	updateGauges();
-	var albumHolder2 = JSON.stringify(albumArray);
-	localStorage.setItem('storage', albumHolder2);
+	localStorage.setItem('storage', JSON.stringify(albumArray));
 });
 
-var gauges = [];
-var scores = [img1, img2];
 
 function createGauge(name, label, min, max)
 {
@@ -107,3 +106,4 @@ function updateGauges()
 
 createGauges();
 
+updateGauges();
