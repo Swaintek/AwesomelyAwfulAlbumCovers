@@ -1,37 +1,37 @@
-/*#img1 #img2 {
-	float: left;
-	max-width: 200px;
-	max-height: 200px;
-}
-
-#img1 {
-	float: left;
-}
-#img2 {
-	float: right;
-}*/
-
 body {
 	background-image: url('img/record_store.jpg');
+}
+
+header {
+  font-family: 'Amatic SC', cursive;
+  color: #49E20E;
+  text-align: center;
+  margin-bottom: 0;
+  font-size: 300%;
+  background-color:rgba(255,0,0,0.67);
+}
+
+h1 {
+  padding-bottom: 0px;
+  margin: 0px auto 0px auto;
+}
+
+p {
+  padding-bottom: 0px;
+  margin: 0px auto 0px auto;
 }
 
 .parent {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border: 1px dashed orange;
   justify-content: space-between;
 }
 
 .child {
-  border: 1px solid blue;
   text-align: center;
 }
 
 #box_one, #chart_box, #box_two {
   flex-grow: 1;
 }
-
-/*#box_two {
-  flex-grow: 2;
-}*/
